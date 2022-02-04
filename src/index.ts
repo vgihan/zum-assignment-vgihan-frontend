@@ -1,13 +1,10 @@
 import * as styles from "../public/css/style.scss";
-import image from "../public/img/test.png";
+import App from "./App";
+import { EventManager } from "./core/eventManager";
+import { Giact } from "./core/giact";
 
 styles;
 
-document.body.innerHTML = `
-  <div>
-    <p>Hello World !</p>
-    <img id="test" />
-  </div>
-`;
+Giact.render(App, document.getElementById("root"));
 
-(document.getElementById("test") as HTMLImageElement).src = image;
+EventManager.regist();

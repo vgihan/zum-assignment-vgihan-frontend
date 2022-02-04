@@ -2,15 +2,12 @@
 @import "./font.scss";
 
 body {
-  background-color: #245354;
-  div {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin-top: 200px;
-
-    font-family: "Nanum";
-    font-size: 50px;
-  }
+  font-family: "Nanum";
+  font-size: 50px;
+  background-color: #666;
+}
+.center-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
