@@ -12,3 +12,5 @@ export const ul = h("ul");
 export const li = h("li");
 export const button = h("button");
 export const input = h("input");
+export const span = h("span");
+export const textarea = h("textarea");

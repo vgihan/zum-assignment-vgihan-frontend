@@ -2,9 +2,10 @@ import { Node } from "../types/node";
 import { Vdom } from "../types/vdom";
 
 export const VirtualDom = (() => {
-  let oldNode: Node | null = null;
+  let _oldNode: Node | null = null;
   const render = (node: Node, $parent: HTMLElement, index = 0) => {
-    updateElement($parent, node, oldNode, index);
+    updateElement($parent, node, _oldNode, index);
+    _oldNode = node;
   };
   const createElement = (node: Node) => {
     if (typeof node === "string" || typeof node === "number") {
@@ -46,7 +47,6 @@ export const VirtualDom = (() => {
   ) => {
     if (!oldNode) {
       $parent.appendChild(createElement(newNode));
-      oldNode = newNode;
     } else if (!newNode) {
       $parent.removeChild($parent.childNodes[index]);
     } else if (isChanged(newNode, oldNode)) {
