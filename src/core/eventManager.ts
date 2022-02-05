@@ -5,7 +5,7 @@ export const EventManager = (() => {
       handler: Function;
     }[];
   } = {};
-  const registedHandler: { event: string; handler: Function }[] = [];
+  const registedHandler: { event: string; handler: any }[] = [];
 
   const addEventHandler = (
     className: string,
@@ -13,9 +13,13 @@ export const EventManager = (() => {
     handler: Function
   ) => {
     if (!eventMapper[event]) eventMapper[event] = [];
+    if (eventMapper[event].some((v) => v.className === className)) return;
     eventMapper[event].push({ className, handler });
   };
   const regist = () => {
+    registedHandler.forEach((v) => {
+      document.removeEventListener(v.event, v.handler);
+    });
     Object.keys(eventMapper).forEach((event) => {
       const eventHandler = (e: any) => {
         const candidates = eventMapper[event];
