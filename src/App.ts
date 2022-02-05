@@ -1,13 +1,11 @@
 import { div } from "./core/h";
-import { VirtualDom } from "./core/virtualDom";
 import Router from "./Router";
 
-function App($parent: HTMLElement) {
+function App() {
   const router = Router();
+
   return {
-    render: () => {
-      VirtualDom.render(div({ class: "app" }, [router.template()]), $parent);
-    },
+    template: () => div({ class: "app" }, [router.template()]),
   };
 }
 
