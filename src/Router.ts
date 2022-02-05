@@ -1,23 +1,33 @@
+import { Giact } from "./core/giact";
 import { div } from "./core/h";
+import { VirtualDom } from "./core/virtualDom";
 import Main from "./pages/Main";
 import Write from "./pages/Write";
 import { ComponentReturnType } from "./types/component";
+import { Path } from "./types/path";
 
 type Router = {
-  [path in string]: ComponentReturnType;
+  [path in Path]: ComponentReturnType;
 };
 
 function Router() {
-  const path = document.location.pathname;
-  const query = document.location.search;
+  const [path, setPath] = Giact.useState<Path>(
+    document.location.pathname as Path
+  );
 
-  const router: Router = {
+  const map: Router = {
     "/": Main(),
     "/write": Write(),
   };
+  const onChangeLocation = () => {
+    setPath(document.location.pathname as Path);
+  };
+
+  window.addEventListener("route", onChangeLocation);
+  window.addEventListener("popstate", onChangeLocation);
 
   return {
-    template: () => div({ class: "router" }, [router[path].template()]),
+    template: () => div({ class: "router" }, [map[path()].template()]),
   };
 }
 
