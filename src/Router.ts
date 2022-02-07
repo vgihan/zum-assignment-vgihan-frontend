@@ -1,33 +1,30 @@
 import { Giact } from "./core/giact";
 import { div } from "./core/h";
-import { VirtualDom } from "./core/virtualDom";
 import Main from "./pages/Main";
 import Write from "./pages/Write";
-import { ComponentReturnType } from "./types/component";
-import { Path } from "./types/path";
+import { Component, ComponentReturnType } from "./types/component";
 
 type Router = {
-  [path in Path]: ComponentReturnType;
+  [path: string]: Component;
 };
 
 function Router() {
-  const [path, setPath] = Giact.useState<Path>(
-    document.location.pathname as Path
-  );
+  const [curPage, setCurPage] = Giact.useState<ComponentReturnType>(Main());
 
   const map: Router = {
-    "/": Main(),
-    "/write": Write(),
+    "/": Main,
+    "/write": Write,
   };
   const onChangeLocation = () => {
-    setPath(document.location.pathname as Path);
+    const path = document.location.pathname;
+    setCurPage(map[path]());
   };
 
   window.addEventListener("route", onChangeLocation);
   window.addEventListener("popstate", onChangeLocation);
 
   return {
-    template: () => div({ class: "router" }, [map[path()].template()]),
+    template: () => div({ class: "router" }, [curPage().template()]),
   };
 }
 

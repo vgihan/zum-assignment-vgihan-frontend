@@ -1,7 +1,5 @@
-import { Path } from "../types/path";
-
 export const Router = (() => {
-  const route = (path: Path) => {
+  const route = (path: string) => {
     history.pushState({ data: "push" }, "", path);
     window.dispatchEvent(new Event("route"));
   };

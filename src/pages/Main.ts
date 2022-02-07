@@ -1,8 +1,8 @@
 import { div } from "../core/h";
-import "../../public/css/main.scss";
 import List from "../components/List";
 import Button from "../components/Button";
 import { Router } from "../core/router";
+import "../../public/css/main.scss";
 
 function Main() {
   const handleClickWrite = () => {
