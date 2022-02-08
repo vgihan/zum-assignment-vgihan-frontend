@@ -9,7 +9,6 @@ function List() {
 
   const getData = async () => {
     const data = await getPost();
-    console.log(data);
     setPosts(data);
   };
 
