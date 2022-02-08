@@ -2,20 +2,21 @@ import { Giact } from "./core/giact";
 import { div } from "./core/h";
 import Main from "./pages/Main";
 import Write from "./pages/Write";
-import { Component, ComponentReturnType } from "./types/component";
+import { Component } from "./types/component";
 
 type Router = {
   [path: string]: Component;
 };
 
 function Router() {
-  const [curPage, setCurPage] = Giact.useState<ComponentReturnType>(Main());
+  const [curPage, setCurPage] = Giact.useRouter(Main());
 
   const map: Router = {
     "/": Main,
     "/write": Write,
   };
   const onChangeLocation = () => {
+    Giact.clear();
     const path = document.location.pathname;
     setCurPage(map[path]());
   };

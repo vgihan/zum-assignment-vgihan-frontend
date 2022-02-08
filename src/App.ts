@@ -5,7 +5,7 @@ function App() {
   const router = Router();
 
   return {
-    template: () => div({ class: "app" }, [router.template()]),
+    template: () => div({ id: "app" }, [router.template()]),
   };
 }
 
