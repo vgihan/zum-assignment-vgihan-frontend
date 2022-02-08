@@ -27,7 +27,7 @@ export const EventManager = (() => {
           e.target.classList.contains(candidate.className)
         );
         targets.forEach((target) => {
-          target.handler();
+          target.handler(e);
         });
       };
       registedHandler.push({ event, handler: eventHandler });
