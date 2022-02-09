@@ -5,18 +5,21 @@ type Props = {
   placeholder: string;
   className: string;
   onChange: Function;
+  value?: string;
 };
 
 function Textarea() {
   return {
-    template: ({ className, placeholder, onChange }: Props) => {
+    template: ({ className, placeholder, onChange, value }: Props) => {
       EventManager.addEventHandler(className, "change", onChange);
-      return textarea({
-        type: "text",
-        class: className,
-        placeholder,
-        focus,
-      });
+      return textarea(
+        {
+          type: "text",
+          class: className,
+          placeholder,
+        },
+        [value]
+      );
     },
   };
 }
