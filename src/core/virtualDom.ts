@@ -45,10 +45,11 @@ export const VirtualDom = (() => {
     oldNode: Node,
     index = 0
   ) => {
-    if (!oldNode) {
+    if (oldNode === undefined || oldNode === null) {
       $parent.appendChild(createElement(newNode));
-    } else if (!newNode) {
-      $parent.removeChild($parent.childNodes[index]);
+    } else if (newNode === undefined || newNode === null) {
+      const target = $parent.childNodes[index] || $parent.lastChild;
+      $parent.removeChild(target);
     } else if (isChanged(newNode, oldNode)) {
       $parent.replaceChild(createElement(newNode), $parent.childNodes[index]);
     } else if ((newNode as Vdom).type) {

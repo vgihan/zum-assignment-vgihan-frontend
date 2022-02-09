@@ -23,8 +23,10 @@ export const EventManager = (() => {
     Object.keys(eventMapper).forEach((event) => {
       const eventHandler = (e: any) => {
         const candidates = eventMapper[event];
-        const targets = candidates.filter((candidate) =>
-          e.target.classList.contains(candidate.className)
+        const targets = candidates.filter(
+          (candidate) =>
+            e.target.classList.contains(candidate.className) ||
+            e.target.closest(`.${candidate.className}`)
         );
         targets.forEach((target) => {
           target.handler(e);
