@@ -13,7 +13,6 @@ function Router() {
   const getPath = () => {
     const path = document.location.pathname;
     const pathElements = path.split("/");
-    console.log(pathElements);
     return {
       path: `/${pathElements[1]}`,
       params: pathElements.slice(2, pathElements.length),
@@ -31,7 +30,6 @@ function Router() {
   const onChangeLocation = () => {
     Giact.clear();
     const nextPage = getPath();
-    console.log(nextPage);
     setCurPage(map[nextPage.path](nextPage.params));
   };
 
