@@ -16,3 +16,9 @@ export interface PostGet {
   title?: string;
   writer?: string;
 }
+export interface PostModify {
+  id: number;
+  title: string;
+  writer: string;
+  content: string;
+}
