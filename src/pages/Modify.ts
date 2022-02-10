@@ -2,7 +2,7 @@ import PostInputContainer from "../components/PostInputContainer";
 import { div } from "../core/h";
 import { Giact } from "../core/giact";
 import Button from "../components/Button";
-import { getPost, getRefreshPost, setPost } from "../api/post";
+import { getRefreshPost, putPost } from "../api/post";
 import { Router } from "../core/router";
 import "../../public/css/write.scss";
 
@@ -23,14 +23,24 @@ function Modify(params: string[]) {
   const handleChangeContent = (e: any) => {
     setContent(e.target.value);
   };
-  const handleClickSubmit = () => {
+  const handleClickSubmit = async () => {
     if (!checkAllInput()) return alert("모든 정보를 입력해주세요");
-    setPost({ writer: writer(), title: title(), content: content() });
+    putPost({
+      id: parseInt(params[0]),
+      writer: writer(),
+      title: title(),
+      content: content(),
+    });
     Router.route("/");
   };
 
   (async () => {
     const data = await getRefreshPost({ id: parseInt(params[0]) });
+    if (data.length === 0) {
+      alert("존재하지 않는 게시글입니다.");
+      Router.route("/");
+      return;
+    }
     setWriter(data[0].writer);
     setTitle(data[0].title);
     setContent(data[0].content);
@@ -53,8 +63,8 @@ function Modify(params: string[]) {
           content()
         ),
         button({
-          name: "제출",
-          className: "submit-btn",
+          name: "수정",
+          className: "modify-btn",
           onClick: handleClickSubmit,
         }),
       ]),
