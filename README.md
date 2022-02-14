@@ -2,6 +2,14 @@
 
 줌 인터넷 바닐라 자바스크립트 채용 과제입니다.
 
+## 실행 방법
+
+```
+git clone https://github.com/vgihan/zum-assignment-vgihan-frontend.git .
+yarn
+yarn start
+```
+
 ## 컴포넌트 구조
 
 - 함수형 컴포넌트 구조를 설계했습니다.
