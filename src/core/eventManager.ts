@@ -13,7 +13,10 @@ export const EventManager = (() => {
     handler: Function
   ) => {
     if (!eventMapper[event]) eventMapper[event] = [];
-    if (eventMapper[event].some((v) => v.className === className)) return;
+    if (eventMapper[event].some((v) => v.className === className))
+      eventMapper[event] = eventMapper[event].filter(
+        (v) => v.className !== className
+      );
     eventMapper[event].push({ className, handler });
   };
   const regist = () => {
