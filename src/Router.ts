@@ -12,10 +12,12 @@ type RouterMap = {
 function Router() {
   const getPath = () => {
     const path = document.location.pathname;
-    const pathElements = path.split("/");
+    const pathVariable = path.split("/");
+    const queryParams = new URLSearchParams(document.location.search);
     return {
-      path: `/${pathElements[1]}`,
-      params: pathElements.slice(2, pathElements.length),
+      path: `/${pathVariable[1]}`,
+      params: pathVariable.slice(2, pathVariable.length),
+      query: queryParams,
     };
   };
   const map: RouterMap = {
@@ -25,12 +27,14 @@ function Router() {
   };
   const initPage = getPath();
   const [curPage, setCurPage] = Giact.useRouter(
-    map[initPage.path](initPage.params)
+    map[initPage.path]({ params: initPage.params, query: initPage.query })
   );
   const onChangeLocation = () => {
     Giact.clear();
     const nextPage = getPath();
-    setCurPage(map[nextPage.path](nextPage.params));
+    setCurPage(
+      map[nextPage.path]({ params: nextPage.params, query: nextPage.query })
+    );
   };
 
   window.addEventListener("route", onChangeLocation);
