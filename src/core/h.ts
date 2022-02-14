@@ -8,6 +8,7 @@ const h =
 
 export const div = h("div");
 export const p = h("p");
+export const a = h("a");
 export const ul = h("ul");
 export const li = h("li");
 export const button = h("button");
