@@ -13,3 +13,11 @@ ul.container > li {
     cursor: pointer;
   }
 }
+.row-box {
+  flex-direction: row;
+  column-gap: 20px;
+}
+.column-info {
+  justify-content: space-around;
+  column-gap: 50px;
+}
