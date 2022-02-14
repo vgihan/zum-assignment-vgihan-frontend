@@ -4,9 +4,10 @@ import { Giact } from "../core/giact";
 import Button from "../components/Button";
 import { getRefreshPost, putPost } from "../api/post";
 import { Router } from "../core/router";
+import { ComponentArgument } from "../types/component";
 import "../../public/css/write.scss";
 
-function Modify(params: string[]) {
+function Modify({ params }: ComponentArgument) {
   const [writer, setWriter] = Giact.useState<string>("");
   const [title, setTitle] = Giact.useState<string>("");
   const [content, setContent] = Giact.useState<string>("");
